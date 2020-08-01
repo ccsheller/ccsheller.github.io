@@ -4,8 +4,8 @@ node_js:
   - 12
 cache: npm
 branches:
-  only:
-    - master
+only:
+  - master
 script:
   - hexo generate
 deploy:
@@ -13,6 +13,6 @@ deploy:
   skip_cleanup: true
   github_token: $GH_TOKEN
   keep_history: true
-    on:
-      branch: master # source code of hexo
+  on:
+    branch: master # source code of hexo
   local_dir: public
