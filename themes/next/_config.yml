@@ -639,6 +639,14 @@ gitalk:
   # Available values: en | es-ES | fr | ru | zh-CN | zh-TW
   language:
 
+utteranc:
+  enable: true
+  repo:  ccsheller/ccsheller.github.io_comments #Github repo such as :TrumanDu/comments
+  pathname: pathname
+  # theme: github-light,github-dark,github-dark-orange
+  theme: github-light
+  cdn: https://utteranc.es/client.js
+
 
 # ---------------------------------------------------------------
 # Post Widgets & Content Sharing Services
