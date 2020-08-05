@@ -1,0 +1,3 @@
+[submodule "themes/freemind"]
+	path = themes/freemind
+	url = https://github.com/ccsheller/hexo-theme-freemind.git
