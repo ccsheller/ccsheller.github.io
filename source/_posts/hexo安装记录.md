@@ -2,6 +2,8 @@
 title: hexo安装记录
 date: 2020-08-01 11:43:44
 tags:
+    - Hexo
+categories: 杂记
 ---
 
 安装还算顺利，照着官网README就可以了。换了主题next。这个next有几个版本。
