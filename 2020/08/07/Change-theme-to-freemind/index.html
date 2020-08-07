@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>你好 Hexo | 代码考古</title>
+  <title>更改主题为freemind | 代码考古</title>
   <meta name="author" content="ccsheller">
   
-  <meta name="description" content="用Hexo配置了博客。这是一个新的征程。">
+  <meta name="description" content="NexT主题，虽然被用很广，但我不喜欢页面显示的动画，这样内容显示前有一段等待时间。最主要是没有找到合适的评论功能，最后使用hexo-next-utteranc。utteranc相比其他利用GitHub Issues需要的权限小，其他相似的还要暴露clientSecret（现在还没有相关严重恶意利用">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="你好 Hexo"/>
+  <meta property="og:title" content="更改主题为freemind"/>
   <meta property="og:site_name" content="代码考古"/>
 
   
@@ -103,7 +103,7 @@
 
 	
 		<div class="page-header ">		
-			<h1 class="title "> 你好 Hexo</h1>
+			<h1 class="title "> 更改主题为freemind</h1>
 		</div>		
 	
 
@@ -123,7 +123,11 @@
 	<div class="mypage">		
 	  		
 
-	  <p>用Hexo配置了博客。这是一个新的征程。</p>
+	  <p>NexT主题，虽然被用很广，但我不喜欢页面显示的动画，这样内容显示前有一段等待时间。最主要是没有找到合适的评论功能，最后使用hexo-next-utteranc。utteranc相比其他利用GitHub Issues需要的权限小，其他相似的还要暴露clientSecret（现在还没有相关严重恶意利用爆出）。在安装utteranc时，其依赖的next-util在淘宝镜像中是错的，又是一翻折腾，手工修改了package-lock.json的引用到npm中。终于可用了，换个网络，不是网页连接不了，就是评论显示不了，不得不感慨墙又砌高了。评论不显示主因是utteranc的cdn被墙。</p>
+<p>那换个评论功能，找到了Commento，这个也可以自己搭VPS里，但整合进NexT，总是放不到合适的位置（才接触JavaScript）。试了几次放弃，换主题。</p>
+<p>看了几个有人气主题，有些风格简单比较适合。当注意到freemind直接支持了评论，它这个评论利用GitHub Issues，只作展示，写评论跳转GitHub页面。这减小了被墙的机率，也不需要授权。</p>
+<p>改了下基本配置，换了颜色模式，就切换了。</p>
+<p>在吐槽下：NexT不支持IE；LeanCloud国内被限制，国际版需要手机号，国内手机号又激活不了。</p>
 	  
 	</div>
 
@@ -137,9 +141,9 @@
             
                 <li><a href="http://ccshell.com/2020/08/07/Use-of-Visual-Studio-Code/">Visual Studio Code 的使用</a></li>
             
-                <li><a href="http://ccshell.com/2020/08/07/Change-theme-to-freemind/">更改主题为freemind</a></li>
-            
                 <li><a href="http://ccshell.com/2020/08/01/hexo%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/">hexo安装记录</a></li>
+            
+                <li><a href="http://ccshell.com/2020/07/31/%E4%BD%A0%E5%A5%BD-Hexo/">你好 Hexo</a></li>
             
         </ul>
     </div>
@@ -152,13 +156,13 @@
 <ul class="pagination">
 	 
 				
-    	<li class="prev"><a href="/2020/08/01/hexo安装记录/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+    	<li class="prev"><a href="/2020/08/07/Use-of-Visual-Studio-Code/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
   		
 
         <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
 		
-          <li class="next disabled"><a>下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>
+		   <li class="next"><a href="/2020/08/01/hexo安装记录/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
 	
 </ul>
@@ -208,7 +212,7 @@
 		   no_comment: "暂时还没有留言呢，点击下面的按钮去留言吧！",
 		   go_to_comment: "去留言",
 		   no_issue: "no_issue",
-		   issue_title: "你好 Hexo",
+		   issue_title: "更改主题为freemind",
 		   issue_id: "",
 		   btn_class: "btn btn-primary",
 		   comments_target: "#comment-thread",
@@ -229,7 +233,7 @@
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	2020-07-31 
+	2020-08-07 
 	</div>
 	
 
