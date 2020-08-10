@@ -10,15 +10,20 @@ VS Code都说牛，其给我的感觉就是功能太丰富，抓不住核心。�
 
 工具用的顺手还是要读文档。此文记录读文档时，觉得重要的内容。
 
-### 改设置
+#### 改设置
 
 MenuBar -> File -> Preferences
 
-### 各种选择模式，列编辑
+#### 各种选择模式，列编辑
 
 这快捷键有点复杂，直接装Vim扩展（也可以装Spacemacs），hjkl就导航了，v和ctrl + v 就选择了。
 
-### Ctrl 快捷键和Vim冲突
+= 格式化
+
+za 切换代码折叠
+
+
+#### Ctrl 快捷键和Vim冲突
 
 在Settings中搜索vim handle keys，点击Edit in settings.json，对于要屏蔽的项添加
 
@@ -31,6 +36,27 @@ MenuBar -> File -> Preferences
 
 - Ctrl + o windows习惯用Ctrl来打开文件（Linux Vim 列出文件夹文件不好用，Spacemacs相对好不少）。因此屏蔽Vim的Ctrl + o
 
-### Ctrl Space 提示与系统冲突
+#### Ctrl Space 提示与系统冲突
 
 找到Preferences下的Keyboard Shortcuts搜Ctrl Space，鼠标移入想修改项后点击前面的笔，在弹出撒个框中按想设置的快捷键，我设定为 Ctrl + Alt + Space。如果提示重复就按回车。
+
+#### 重构重命名
+
+按F2
+
+#### 错误和警告导航
+
+按F8
+
+#### 代码片断输入
+
+在输入过程中可以跟据提示选择项目后按tab快速输入一个对应的片断，并用tab在输入片断内切换位置。比如输入try，选择trycatch，按tab。
+
+#### Emmet的支持
+
+#### 输入检查
+
+设定中搜索check js，启用它
+
+
+
