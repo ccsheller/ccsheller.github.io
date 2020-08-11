@@ -22,7 +22,6 @@ MenuBar -> File -> Preferences
 
 za 切换代码折叠
 
-
 #### Ctrl 快捷键和Vim冲突
 
 在Settings中搜索vim handle keys，点击Edit in settings.json，对于要屏蔽的项添加
@@ -40,14 +39,6 @@ za 切换代码折叠
 
 找到Preferences下的Keyboard Shortcuts搜Ctrl Space，鼠标移入想修改项后点击前面的笔，在弹出撒个框中按想设置的快捷键，我设定为 Ctrl + Alt + Space。如果提示重复就按回车。
 
-#### 重构重命名
-
-按F2
-
-#### 错误和警告导航
-
-按F8
-
 #### 代码片断输入
 
 在输入过程中可以跟据提示选择项目后按tab快速输入一个对应的片断，并用tab在输入片断内切换位置。比如输入try，选择trycatch，按tab。
@@ -58,5 +49,18 @@ za 切换代码折叠
 
 设定中搜索check js，启用它
 
+#### 原生快捷键
 
+Alt + ←             前一个编辑位置
+Alt + →             后一个编辑位置
+
+Ctrl + p            搜索并打开文件
+Ctrl + Shift + P    命令面板
+
+F2                  重构重命名
+F8                  错误和警告导航
+
+#### 扩展
+
+Visual Studio IntelliCode 跟据上下文的AI提示，无需配置。其他语言需要配置。
 
