@@ -34,6 +34,7 @@ za 切换代码折叠
 ```
 
 - Ctrl + o windows习惯用Ctrl来打开文件（Linux Vim 列出文件夹文件不好用，Spacemacs相对好不少）。因此屏蔽Vim的Ctrl + o
+- Ctrl + b
 
 #### Ctrl Space 提示与系统冲突
 
@@ -51,16 +52,29 @@ za 切换代码折叠
 
 #### 原生快捷键
 
-Alt + ←             前一个编辑位置
-Alt + →             后一个编辑位置
-
-Ctrl + p            搜索并打开文件
-Ctrl + Shift + P    命令面板
-
-F2                  重构重命名
-F8                  错误和警告导航
+|||
+|---|--|
+|Alt + ←|前一个编辑位置|
+|Alt + →|后一个编辑位置|
+||
+|Ctrl + b|切换侧边栏显示|
+|Ctrl + <num>|切换编辑组|
+|Alt + <num>|切换编辑文件|
+|Ctrl + Tab|当前编辑组中切换文件|
+||
+|Ctrl + p|搜索并打开文件|
+|Ctrl + Shift + p|命令面板|
+|Ctrl + Shift + o|根据Symbol在当前文件搜索，可以快速跳转|
+|Alt + F12|Symbol窥视|
+||
+|F2|重构重命名|
+|F8|错误和警告导航|
 
 #### 扩展
 
 Visual Studio IntelliCode 跟据上下文的AI提示，无需配置。其他语言需要配置。
+
+#### 其他功能
+
+整合了终端系统
 
