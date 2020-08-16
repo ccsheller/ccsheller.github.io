@@ -11,6 +11,8 @@ categories: 杂记
 
 部属到github有点折腾。如果用hexo-deployer-git还是比较简单，但是每次都要手动发布。看好像支持Travis CI ，可以自动发布，这个可以省事。不了解github Token，看hexo和Travis CI应该是生成一个私人Token，但github的Token不分库。
 
+<!--more-->
+
 主要问题就是这个部属文件的书写.travis.yml。看doc下面的评论比较靠谱，拷贝了一份和官方的比对。没问题，只是没有缩进。所有提交，Travis CI也自动编译了，感觉没有部署回github。难道是我使用source分支作为主分支的问题？以前github只支持master分支的PAGES(以前可能是以讹传讹)。重新用master分支再来一遍，还是没有部属。难道是缩进的问题，查了YAML语法，其使用空格缩进，用缩进表示层次，用了缩进后提交，还是不行，显示Could not parse。难道是有不可见字符，vs code显示不可见字符，没发现不可见字符。难道是结尾要有空行，还是不行。重新看hexo和Travis CI的文档，比对，没有发现不同，太折腾。突然看到hexo 中的配置用的-(减号，markdown怎么给-加粗)，Travis CI中用的_下划线，修改后还是Could not parse。我看Travis CI不要缩进也是可以用的，删除所有空格，还是不行。没招了，只有检查不可见字符了，找到[config travis-ci](https://config.travis-ci.com/explore)。从vs code贴过去居然是彩色的格式，用nodepad过渡，显示undefined: undefined。删除缩进，试了几次可以解析了。从nodepad贴回vs code，加上缩进，提交，Travis CI运行正常了。
 
 **小结：**

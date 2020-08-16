@@ -8,6 +8,8 @@ categories: 工具
 
 VS Code都说牛，其给我的感觉就是功能太丰富，抓不住核心。其中智能提示只显示当前文件内容，搜索一翻，有的说用TSD，有的说用Typings。我就用来学JavaScript，书上的例子，感觉不到变化，反正是没搞明白。换用WebStorm，也没明显的区别，还折腾了好久的主题（喜欢Linux terminal emulator中取消系统配色后的淡黄色），还启动慢，太臃肿。换回VS Code，为此需要弄清其使用，怎么配置好intellisense，其WorkSpace有什么功能性的必要，.vscode文件是否在项目中的必要。
 
+<!--more-->
+
 工具用的顺手还是要读文档。此文记录读文档时，觉得重要的内容。
 
 #### 改设置

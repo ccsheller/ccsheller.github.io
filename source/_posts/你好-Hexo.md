@@ -6,3 +6,5 @@ tags:
 categories: 杂记
 ---
 用Hexo配置了博客。这是一个新的征程。
+
+<!--more-->
