@@ -6,7 +6,7 @@
   <title>更改主题为freemind | 代码考古</title>
   <meta name="author" content="ccsheller">
   
-  <meta name="description" content="NexT主题，虽然被用很广，但我不喜欢页面显示的动画，这样内容显示前有一段等待时间。最主要是没有找到合适的评论功能，最后使用hexo-next-utteranc。utteranc相比其他利用GitHub Issues需要的权限小，其他相似的还要暴露clientSecret（现在还没有相关严重恶意利用">
+  <meta name="description" content="NexT主题，虽然被用很广，但我不喜欢页面显示的动画，这样内容显示前有一段等待时间。最主要是没有找到合适的评论功能，最后使用hexo-next-utteranc。utteranc相比其他利用GitHub Issues需要的权限小，其他相似的还要暴露clientSecret（现在还没有相关严重恶意利用爆出）。在安装utteranc时，其依赖的next-util在淘宝镜像中是错的，又是一翻折腾，手工修改了package-lock.json的引用到npm中。终于可用了，换个网络，不是网页连接不了，就是评论显示不了，不得不感慨墙又砌高了。评论不显示主因是utteranc的cdn被墙。">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -124,11 +124,13 @@
 	  		
 
 	  <p>NexT主题，虽然被用很广，但我不喜欢页面显示的动画，这样内容显示前有一段等待时间。最主要是没有找到合适的评论功能，最后使用hexo-next-utteranc。utteranc相比其他利用GitHub Issues需要的权限小，其他相似的还要暴露clientSecret（现在还没有相关严重恶意利用爆出）。在安装utteranc时，其依赖的next-util在淘宝镜像中是错的，又是一翻折腾，手工修改了package-lock.json的引用到npm中。终于可用了，换个网络，不是网页连接不了，就是评论显示不了，不得不感慨墙又砌高了。评论不显示主因是utteranc的cdn被墙。</p>
+<a id="more"></a>
+
 <p>那换个评论功能，找到了Commento，这个也可以自己搭VPS里，但整合进NexT，总是放不到合适的位置（才接触JavaScript）。试了几次放弃，换主题。</p>
 <p>看了几个有人气主题，有些风格简单比较适合。当注意到freemind直接支持了评论，它这个评论利用GitHub Issues，只作展示，写评论跳转GitHub页面。这减小了被墙的机率，也不需要授权。</p>
 <p>改了下基本配置，换了颜色模式，就切换了。</p>
 <p>在吐槽下：NexT不支持IE；LeanCloud国内被限制，国际版需要手机号，国内手机号又激活不了。</p>
-	  
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">	  
 	</div>
 
 	<!-- recommended posts -->
@@ -138,6 +140,8 @@
     <div class="recommended_posts">
         <h1>推荐文章</h1>
         <ul>
+            
+                <li><a href="http://ccshell.com/2020/08/16/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AF%BB%E6%87%82%E8%B4%A2%E6%8A%A5/">一本书读懂财报</a></li>
             
                 <li><a href="http://ccshell.com/2020/08/07/Use-of-Visual-Studio-Code/">Visual Studio Code 的使用</a></li>
             

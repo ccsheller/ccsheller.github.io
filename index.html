@@ -125,9 +125,52 @@
 		
             
 		
+            
+		
         
         <!-- render other articles -->
         
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2020-08-16 </div>
+			<div class="article-title"><a href="/2020/08/16/一本书读懂财报/" >一本书读懂财报</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<blockquote class="pullquote mindmap mindmap-md"><ul>
+<li>一本书读懂财报<ul>
+<li>会计是什么<ul>
+<li>科学</li>
+<li>艺术</li>
+<li>魔法</li>
+</ul>
+</li>
+<li>财务报表<ul>
+<li>资产负债表</li>
+<li>利润表</li>
+<li>现金流量表</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
+	
+	</div>
+  <a type="button" href="/2020/08/16/一本书读懂财报/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+           
+		
            
 			  
 	
@@ -144,92 +187,6 @@
 	
 	
 		<p>VS Code都说牛，其给我的感觉就是功能太丰富，抓不住核心。其中智能提示只显示当前文件内容，搜索一翻，有的说用TSD，有的说用Typings。我就用来学JavaScript，书上的例子，感觉不到变化，反正是没搞明白。换用WebStorm，也没明显的区别，还折腾了好久的主题（喜欢Linux terminal emulator中取消系统配色后的淡黄色），还启动慢，太臃肿。换回VS Code，为此需要弄清其使用，怎么配置好intellisense，其WorkSpace有什么功能性的必要，.vscode文件是否在项目中的必要。</p>
-<p>工具用的顺手还是要读文档。此文记录读文档时，觉得重要的内容。</p>
-<h4 id="改设置"><a href="#改设置" class="headerlink" title="改设置"></a>改设置</h4><p>MenuBar -&gt; File -&gt; Preferences</p>
-<h4 id="各种选择模式，列编辑"><a href="#各种选择模式，列编辑" class="headerlink" title="各种选择模式，列编辑"></a>各种选择模式，列编辑</h4><p>这快捷键有点复杂，直接装Vim扩展（也可以装Spacemacs），hjkl就导航了，v和ctrl + v 就选择了。</p>
-<p>= 格式化</p>
-<p>za 切换代码折叠</p>
-<h4 id="Ctrl-快捷键和Vim冲突"><a href="#Ctrl-快捷键和Vim冲突" class="headerlink" title="Ctrl 快捷键和Vim冲突"></a>Ctrl 快捷键和Vim冲突</h4><p>在Settings中搜索vim handle keys，点击Edit in settings.json，对于要屏蔽的项添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;vim.handleKeys&quot;: &#123;</span><br><span class="line">    &quot;&lt;C-a&gt;&quot;: false,</span><br><span class="line">    &quot;&lt;C-f&gt;&quot;: false</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Ctrl + o windows习惯用Ctrl来打开文件（Linux Vim 列出文件夹文件不好用，Spacemacs相对好不少）。因此屏蔽Vim的Ctrl + o</li>
-<li>Ctrl + b</li>
-</ul>
-<h4 id="Ctrl-Space-提示与系统冲突"><a href="#Ctrl-Space-提示与系统冲突" class="headerlink" title="Ctrl Space 提示与系统冲突"></a>Ctrl Space 提示与系统冲突</h4><p>找到Preferences下的Keyboard Shortcuts搜Ctrl Space，鼠标移入想修改项后点击前面的笔，在弹出撒个框中按想设置的快捷键，我设定为 Ctrl + Alt + Space。如果提示重复就按回车。</p>
-<h4 id="代码片断输入"><a href="#代码片断输入" class="headerlink" title="代码片断输入"></a>代码片断输入</h4><p>在输入过程中可以跟据提示选择项目后按tab快速输入一个对应的片断，并用tab在输入片断内切换位置。比如输入try，选择trycatch，按tab。</p>
-<h4 id="Emmet的支持"><a href="#Emmet的支持" class="headerlink" title="Emmet的支持"></a>Emmet的支持</h4><h4 id="输入检查"><a href="#输入检查" class="headerlink" title="输入检查"></a>输入检查</h4><p>设定中搜索check js，启用它</p>
-<h4 id="原生快捷键"><a href="#原生快捷键" class="headerlink" title="原生快捷键"></a>原生快捷键</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Alt + ←</td>
-<td>前一个编辑位置</td>
-</tr>
-<tr>
-<td>Alt + →</td>
-<td>后一个编辑位置</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Ctrl + b</td>
-<td>切换侧边栏显示</td>
-</tr>
-<tr>
-<td>Ctrl + <num></td>
-<td>切换编辑组</td>
-</tr>
-<tr>
-<td>Alt + <num></td>
-<td>切换编辑文件</td>
-</tr>
-<tr>
-<td>Ctrl + Tab</td>
-<td>当前编辑组中切换文件</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Ctrl + p</td>
-<td>搜索并打开文件</td>
-</tr>
-<tr>
-<td>Ctrl + Shift + p</td>
-<td>命令面板</td>
-</tr>
-<tr>
-<td>Ctrl + Shift + o</td>
-<td>根据Symbol在当前文件搜索，可以快速跳转</td>
-</tr>
-<tr>
-<td>Alt + F12</td>
-<td>Symbol窥视</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>F2</td>
-<td>重构重命名</td>
-</tr>
-<tr>
-<td>F8</td>
-<td>错误和警告导航</td>
-</tr>
-</tbody></table>
-<h4 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h4><p>Visual Studio IntelliCode 跟据上下文的AI提示，无需配置。其他语言需要配置。</p>
-<h4 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h4><p>整合了终端系统</p>
-
 	
 	</div>
   <a type="button" href="/2020/08/07/Use-of-Visual-Studio-Code/#more" class="btn btn-default more">阅读此文</a>
@@ -253,11 +210,6 @@
 	
 	
 		<p>NexT主题，虽然被用很广，但我不喜欢页面显示的动画，这样内容显示前有一段等待时间。最主要是没有找到合适的评论功能，最后使用hexo-next-utteranc。utteranc相比其他利用GitHub Issues需要的权限小，其他相似的还要暴露clientSecret（现在还没有相关严重恶意利用爆出）。在安装utteranc时，其依赖的next-util在淘宝镜像中是错的，又是一翻折腾，手工修改了package-lock.json的引用到npm中。终于可用了，换个网络，不是网页连接不了，就是评论显示不了，不得不感慨墙又砌高了。评论不显示主因是utteranc的cdn被墙。</p>
-<p>那换个评论功能，找到了Commento，这个也可以自己搭VPS里，但整合进NexT，总是放不到合适的位置（才接触JavaScript）。试了几次放弃，换主题。</p>
-<p>看了几个有人气主题，有些风格简单比较适合。当注意到freemind直接支持了评论，它这个评论利用GitHub Issues，只作展示，写评论跳转GitHub页面。这减小了被墙的机率，也不需要授权。</p>
-<p>改了下基本配置，换了颜色模式，就切换了。</p>
-<p>在吐槽下：NexT不支持IE；LeanCloud国内被限制，国际版需要手机号，国内手机号又激活不了。</p>
-
 	
 	</div>
   <a type="button" href="/2020/08/07/Change-theme-to-freemind/#more" class="btn btn-default more">阅读此文</a>
@@ -282,11 +234,6 @@
 	
 		<p>安装还算顺利，照着官网README就可以了。换了主题next。这个next有几个版本。<br>感觉hexo-theme-next放node_modules目录也可以用。但是.gitignore默认是排除node_modules的，所以还是将hexo-theme-next拷贝到theme下并重命名为next。</p>
 <p>部属到github有点折腾。如果用hexo-deployer-git还是比较简单，但是每次都要手动发布。看好像支持Travis CI ，可以自动发布，这个可以省事。不了解github Token，看hexo和Travis CI应该是生成一个私人Token，但github的Token不分库。</p>
-<p>主要问题就是这个部属文件的书写.travis.yml。看doc下面的评论比较靠谱，拷贝了一份和官方的比对。没问题，只是没有缩进。所有提交，Travis CI也自动编译了，感觉没有部署回github。难道是我使用source分支作为主分支的问题？以前github只支持master分支的PAGES(以前可能是以讹传讹)。重新用master分支再来一遍，还是没有部属。难道是缩进的问题，查了YAML语法，其使用空格缩进，用缩进表示层次，用了缩进后提交，还是不行，显示Could not parse。难道是有不可见字符，vs code显示不可见字符，没发现不可见字符。难道是结尾要有空行，还是不行。重新看hexo和Travis CI的文档，比对，没有发现不同，太折腾。突然看到hexo 中的配置用的-(减号，markdown怎么给-加粗)，Travis CI中用的_下划线，修改后还是Could not parse。我看Travis CI不要缩进也是可以用的，删除所有空格，还是不行。没招了，只有检查不可见字符了，找到<a target="_blank" rel="noopener" href="https://config.travis-ci.com/explore">config travis-ci</a>。从vs code贴过去居然是彩色的格式，用nodepad过渡，显示undefined: undefined。删除缩进，试了几次可以解析了。从nodepad贴回vs code，加上缩进，提交，Travis CI运行正常了。</p>
-<p><strong>小结：</strong></p>
-<p>注意不可见字符<br>注意-(减号）和_(下划线)<br>注意缩进</p>
-<p>用ccsheller.github.io是可以访问了。但是ccshell.com还是显示以前的内容。本来昨天我把以前Pages库重命名后，以前的是失效了。后来我又无意调整了它的GitHub Pages配置项（我以为调整的是ccsheller.github.io），以前的和新的项目都可用了，说明github可以启用多个Pages项目（我记得每个用户只能启一个）。调整ccsheller.github.io的配置，弄不好。又调整了以前项目的配置项到None分支，也就是禁用Pages。等待会，ccshell.com也失效了，但是还是不切换到新页面。看了GitHub Pages配置项，说published at ccsheller.github.io ，可能这里不是自动更新的，我就切换了下其分支，等待一会。ccshell.com终于可以正常显示。</p>
-
 	
 	</div>
   <a type="button" href="/2020/08/01/hexo安装记录/#more" class="btn btn-default more">阅读此文</a>
@@ -310,7 +257,6 @@
 	
 	
 		<p>用Hexo配置了博客。这是一个新的征程。</p>
-
 	
 	</div>
   <a type="button" href="/2020/07/31/你好-Hexo/#more" class="btn btn-default more">阅读此文</a>
@@ -350,6 +296,8 @@
 		
 			<li><a href="/categories/杂记/">杂记<span>3</span></a></li>
 		
+			<li><a href="/categories/笔记/">笔记<span>1</span></a></li>
+		
 		</ul>
 	</div>
 
@@ -363,6 +311,8 @@
 		
 			<li><a href="/tags/Hexo/">Hexo<span>3</span></a></li>
 		
+			<li><a href="/tags/金融/">金融<span>1</span></a></li>
+		
 		 
 		</ul>
 	</div>
@@ -373,6 +323,10 @@
 <div class="widget">
   <h4>最新文章</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2020/08/16/一本书读懂财报/" ><i class="fa fa-file-o"></i>一本书读懂财报</a>
+      </li>
     
       <li>
         <a href="/2020/08/07/Use-of-Visual-Studio-Code/" ><i class="fa fa-file-o"></i>Visual Studio Code 的使用</a>

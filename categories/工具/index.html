@@ -130,92 +130,6 @@
 	
 	
 		<p>VS Code都说牛，其给我的感觉就是功能太丰富，抓不住核心。其中智能提示只显示当前文件内容，搜索一翻，有的说用TSD，有的说用Typings。我就用来学JavaScript，书上的例子，感觉不到变化，反正是没搞明白。换用WebStorm，也没明显的区别，还折腾了好久的主题（喜欢Linux terminal emulator中取消系统配色后的淡黄色），还启动慢，太臃肿。换回VS Code，为此需要弄清其使用，怎么配置好intellisense，其WorkSpace有什么功能性的必要，.vscode文件是否在项目中的必要。</p>
-<p>工具用的顺手还是要读文档。此文记录读文档时，觉得重要的内容。</p>
-<h4 id="改设置"><a href="#改设置" class="headerlink" title="改设置"></a>改设置</h4><p>MenuBar -&gt; File -&gt; Preferences</p>
-<h4 id="各种选择模式，列编辑"><a href="#各种选择模式，列编辑" class="headerlink" title="各种选择模式，列编辑"></a>各种选择模式，列编辑</h4><p>这快捷键有点复杂，直接装Vim扩展（也可以装Spacemacs），hjkl就导航了，v和ctrl + v 就选择了。</p>
-<p>= 格式化</p>
-<p>za 切换代码折叠</p>
-<h4 id="Ctrl-快捷键和Vim冲突"><a href="#Ctrl-快捷键和Vim冲突" class="headerlink" title="Ctrl 快捷键和Vim冲突"></a>Ctrl 快捷键和Vim冲突</h4><p>在Settings中搜索vim handle keys，点击Edit in settings.json，对于要屏蔽的项添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;vim.handleKeys&quot;: &#123;</span><br><span class="line">    &quot;&lt;C-a&gt;&quot;: false,</span><br><span class="line">    &quot;&lt;C-f&gt;&quot;: false</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Ctrl + o windows习惯用Ctrl来打开文件（Linux Vim 列出文件夹文件不好用，Spacemacs相对好不少）。因此屏蔽Vim的Ctrl + o</li>
-<li>Ctrl + b</li>
-</ul>
-<h4 id="Ctrl-Space-提示与系统冲突"><a href="#Ctrl-Space-提示与系统冲突" class="headerlink" title="Ctrl Space 提示与系统冲突"></a>Ctrl Space 提示与系统冲突</h4><p>找到Preferences下的Keyboard Shortcuts搜Ctrl Space，鼠标移入想修改项后点击前面的笔，在弹出撒个框中按想设置的快捷键，我设定为 Ctrl + Alt + Space。如果提示重复就按回车。</p>
-<h4 id="代码片断输入"><a href="#代码片断输入" class="headerlink" title="代码片断输入"></a>代码片断输入</h4><p>在输入过程中可以跟据提示选择项目后按tab快速输入一个对应的片断，并用tab在输入片断内切换位置。比如输入try，选择trycatch，按tab。</p>
-<h4 id="Emmet的支持"><a href="#Emmet的支持" class="headerlink" title="Emmet的支持"></a>Emmet的支持</h4><h4 id="输入检查"><a href="#输入检查" class="headerlink" title="输入检查"></a>输入检查</h4><p>设定中搜索check js，启用它</p>
-<h4 id="原生快捷键"><a href="#原生快捷键" class="headerlink" title="原生快捷键"></a>原生快捷键</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Alt + ←</td>
-<td>前一个编辑位置</td>
-</tr>
-<tr>
-<td>Alt + →</td>
-<td>后一个编辑位置</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Ctrl + b</td>
-<td>切换侧边栏显示</td>
-</tr>
-<tr>
-<td>Ctrl + <num></td>
-<td>切换编辑组</td>
-</tr>
-<tr>
-<td>Alt + <num></td>
-<td>切换编辑文件</td>
-</tr>
-<tr>
-<td>Ctrl + Tab</td>
-<td>当前编辑组中切换文件</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Ctrl + p</td>
-<td>搜索并打开文件</td>
-</tr>
-<tr>
-<td>Ctrl + Shift + p</td>
-<td>命令面板</td>
-</tr>
-<tr>
-<td>Ctrl + Shift + o</td>
-<td>根据Symbol在当前文件搜索，可以快速跳转</td>
-</tr>
-<tr>
-<td>Alt + F12</td>
-<td>Symbol窥视</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>F2</td>
-<td>重构重命名</td>
-</tr>
-<tr>
-<td>F8</td>
-<td>错误和警告导航</td>
-</tr>
-</tbody></table>
-<h4 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h4><p>Visual Studio IntelliCode 跟据上下文的AI提示，无需配置。其他语言需要配置。</p>
-<h4 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h4><p>整合了终端系统</p>
-
 	
 	</div>
   <a type="button" href="/2020/08/07/Use-of-Visual-Studio-Code/#more" class="btn btn-default more">阅读此文</a>
@@ -250,6 +164,8 @@
 		
 			<li><a href="/categories/杂记/">杂记<span>3</span></a></li>
 		
+			<li><a href="/categories/笔记/">笔记<span>1</span></a></li>
+		
 		</ul>
 	</div>
 
@@ -259,9 +175,11 @@
 		<h4>标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Hexo/">Hexo<span>3</span></a></li>
-		
 			<li><a href="/tags/Visual-Studio-Code/">Visual Studio Code<span>1</span></a></li>
+		
+			<li><a href="/tags/金融/">金融<span>1</span></a></li>
+		
+			<li><a href="/tags/Hexo/">Hexo<span>3</span></a></li>
 		
 		 
 		</ul>
@@ -273,6 +191,10 @@
 <div class="widget">
   <h4>最新文章</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2020/08/16/一本书读懂财报/" ><i class="fa fa-file-o"></i>一本书读懂财报</a>
+      </li>
     
       <li>
         <a href="/2020/08/07/Use-of-Visual-Studio-Code/" ><i class="fa fa-file-o"></i>Visual Studio Code 的使用</a>
