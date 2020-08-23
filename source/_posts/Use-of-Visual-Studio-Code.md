@@ -106,6 +106,22 @@ jsconfig.json 是项目配置文件
 
 实现分项目控制，每个项目需要自己的jsconfig.json
 
+#### 智能提示
+
+编写代码时，没有对应智能提示需要在jsconfig.json中添加如下配置（以nodejs为例）:
+
+```
+{
+    "typeAcquisition": {
+        "include": [
+            "node"
+        ]
+    }
+}
+```
+
+这样式vscode将会引入对应库类型申明，立即生效。如果没有效，等待片刻，vscode需要从网上自动同步数据。如果还是没效，可能需要重启下。重启没效果可能是网络问题，或者库还未公开支持（公开支持[查询](https://microsoft.github.io/TypeSearch/)）。
+
 #### 全局变量和类型检查
 
 （引用文档）
