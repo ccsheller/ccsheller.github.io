@@ -227,6 +227,10 @@ d.ts files are type declarations. In this case, globals.d.ts lets TypeScript kno
 
 配置文件tasks.json在工作空间配置文件夹下.vscode
 
+#### TypeSearch
+
+查询Type是否支持智能提示[TypeSearch](https://microsoft.github.io/TypeSearch/)
+
 #### 其他功能
 
 支持 JSDoc
