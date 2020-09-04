@@ -1,0 +1,403 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>grunt note | 代码考古</title>
+  <meta name="author" content="ccsheller">
+  
+  <meta name="description" content="项目中涉及grunt，因此又读了相关文档。
+grunt是一个JaveScript版的任务运行工具。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="grunt note"/>
+  <meta property="og:site_name" content="代码考古"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/cosmo.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight-default.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+  <![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  
+    <script src="/js/marked.js"></script>
+    <script src="/js/comment.js"></script>
+    <script src="/js/timeago.min.js"></script>
+    <script src="/js/highlight.min.js"></script>
+	<script src="/js/spin.min.js"></script>
+  
+  <!-- analytics -->
+  
+
+
+
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+<body>
+  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">代码考古</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+    <div class="content">
+      
+
+
+	
+		<div class="page-header ">		
+			<h1 class="title "> grunt note</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>项目中涉及grunt，因此又读了相关文档。</p>
+<p>grunt是一个JaveScript版的任务运行工具。</p>
+<a id="more"></a>
+
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g grunt-cli</span><br></pre></td></tr></table></figure>
+<p>此命令并不会安装grunt，其会从项目目录开始找最接近的grunt执行</p>
+<p>最简单执行npm，来安装grunt配置package.json</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install grunt --save-dev</span><br></pre></td></tr></table></figure>
+
+<p>根据情况修改package.json依赖的grunt版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;my-project-name&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;0.1.0&quot;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;grunt&quot;: &quot;~0.4.5&quot;,</span><br><span class="line">    &quot;grunt-contrib-jshint&quot;: &quot;~0.10.0&quot;,</span><br><span class="line">    &quot;grunt-contrib-nodeunit&quot;: &quot;~0.4.1&quot;,</span><br><span class="line">    &quot;grunt-contrib-uglify&quot;: &quot;~0.5.0&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果现有项目配置好了grunt，直接执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>现在需要配置Gruntfile，对应文件Gruntfile.js 或 Gruntfile.coffee</p>
+<h4 id="Gruntfile"><a href="#Gruntfile" class="headerlink" title="Gruntfile"></a>Gruntfile</h4><p>Gruntfile 由下面几个部分主成：</p>
+<ul>
+<li>封装器(wrapper)函数</li>
+<li>项目和任务的配置</li>
+<li>需要载入的Grunt插件和任务</li>
+<li>自定义任务</li>
+</ul>
+<h5 id="封装器-wrapper-函数"><a href="#封装器-wrapper-函数" class="headerlink" title="封装器(wrapper)函数"></a>封装器(wrapper)函数</h5><p>所有代码都要放在里面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; function(grunt) &#123;</span><br><span class="line">  &#x2F;&#x2F; Do grunt-related things in here</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="项目和任务的配置"><a href="#项目和任务的配置" class="headerlink" title="项目和任务的配置"></a>项目和任务的配置</h5><p>将配置数据作为对象传给grunt.initConfig。<br>对象创建可以使用任何JS语法。其中可用&lt;% %&gt;引用任何配置属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">grunt.initConfig(&#123;</span><br><span class="line">  pkg: grunt.file.readJSON(&#39;package.json&#39;),</span><br><span class="line">  uglify: &#123;</span><br><span class="line">    options: &#123;</span><br><span class="line">      banner: &#39;&#x2F;*! &lt;%&#x3D; pkg.name %&gt; &lt;%&#x3D; grunt.template.today(&quot;yyyy-mm-dd&quot;) %&gt; *&#x2F;\n&#39;</span><br><span class="line">    &#125;,</span><br><span class="line">    build: &#123;</span><br><span class="line">      src: &#39;src&#x2F;&lt;%&#x3D; pkg.name %&gt;.js&#39;,</span><br><span class="line">      dest: &#39;build&#x2F;&lt;%&#x3D; pkg.name %&gt;.min.js&#39;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+
+<h5 id="需要载入的Grunt插件和任务"><a href="#需要载入的Grunt插件和任务" class="headerlink" title="需要载入的Grunt插件和任务"></a>需要载入的Grunt插件和任务</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Load the plugin that provides the &quot;uglify&quot; task.</span><br><span class="line">grunt.loadNpmTasks(&#39;grunt-contrib-uglify&#39;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="自定义任务"><a href="#自定义任务" class="headerlink" title="自定义任务"></a>自定义任务</h5><p>可以定义一到多个任务，默认任务指定default</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt.registerTask(&#39;default&#39;, [&#39;uglify&#39;]);</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grunt.registerTask(&#39;default&#39;, &#39;Log some stuff.&#39;, function() &#123;</span><br><span class="line">    grunt.log.write(&#39;Logging some stuff...&#39;).ok();</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>还可以载入外部任务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt.loadTasks</span><br></pre></td></tr></table></figure>
+
+<p>完整例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; function(grunt) &#123;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; Project configuration.</span><br><span class="line">  grunt.initConfig(&#123;</span><br><span class="line">    pkg: grunt.file.readJSON(&#39;package.json&#39;),</span><br><span class="line">    uglify: &#123;</span><br><span class="line">      options: &#123;</span><br><span class="line">        banner: &#39;&#x2F;*! &lt;%&#x3D; pkg.name %&gt; &lt;%&#x3D; grunt.template.today(&quot;yyyy-mm-dd&quot;) %&gt; *&#x2F;\n&#39;</span><br><span class="line">      &#125;,</span><br><span class="line">      build: &#123;</span><br><span class="line">        src: &#39;src&#x2F;&lt;%&#x3D; pkg.name %&gt;.js&#39;,</span><br><span class="line">        dest: &#39;build&#x2F;&lt;%&#x3D; pkg.name %&gt;.min.js&#39;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; Load the plugin that provides the &quot;uglify&quot; task.</span><br><span class="line">  grunt.loadNpmTasks(&#39;grunt-contrib-uglify&#39;);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; Default task(s).</span><br><span class="line">  grunt.registerTask(&#39;default&#39;, [&#39;uglify&#39;]);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>配置好的项目，可以运行了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt</span><br></pre></td></tr></table></figure>
+
+<h4 id="Gruntfile-输写"><a href="#Gruntfile-输写" class="headerlink" title="Gruntfile 输写"></a>Gruntfile 输写</h4><p>确定需求，找对应插件或自己写</p>
+<ul>
+<li>想监视文件变动<ul>
+<li>grunt-contrib-watch</li>
+</ul>
+</li>
+<li>想检查文件书写样式，最佳实践<ul>
+<li>grunt-contrib-jshint</li>
+</ul>
+</li>
+<li>想单元测试<ul>
+<li>grunt-contrib-qunit</li>
+</ul>
+</li>
+<li>想并接多个文件到一个<ul>
+<li>grunt-contrib-concat</li>
+</ul>
+</li>
+<li>想压缩文件大小<ul>
+<li>grunt-contrib-uglify</li>
+</ul>
+</li>
+</ul>
+<p>将插件和自定义任务组合（相关插件要在package.json中配置，以便安装），在grunt.initConfig中进行对应配置</p>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">	  
+	</div>
+
+	<!-- recommended posts -->
+	
+		
+
+    <div class="recommended_posts">
+        <h1>推荐文章</h1>
+        <ul>
+            
+                <li><a href="http://ccshell.com/2020/09/03/qmake-note/">qmake 笔记</a></li>
+            
+                <li><a href="http://ccshell.com/2020/08/17/Support-MindMap/">支持思维导图</a></li>
+            
+                <li><a href="http://ccshell.com/2020/08/16/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AF%BB%E6%87%82%E8%B4%A2%E6%8A%A5/">一本书读懂财报</a></li>
+            
+                <li><a href="http://ccshell.com/2020/08/07/Use-of-Visual-Studio-Code/">Visual Studio Code 的使用</a></li>
+            
+        </ul>
+    </div>
+
+	
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+        
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2020/09/03/qmake-note/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+    	 
+	 <div id="comment-thread"></div>
+	 <div id="loading-spin"></div>
+	 <script type="text/javascript">
+	   getComments({
+           type: "github" ? "github" : "github",       
+	       user: "ccsheller",
+	       repo: "ccsheller.github.io",
+		   client_id: "",
+           client_secret: "",
+		   no_comment: "暂时还没有留言呢，点击下面的按钮去留言吧！",
+		   go_to_comment: "去留言",
+		   no_issue: "no_issue",
+		   issue_title: "grunt note",
+		   issue_id: "",
+		   btn_class: "btn btn-primary",
+		   comments_target: "#comment-thread",
+		   loading_target: "#loading_spin"
+		   });
+	 </script>
+  
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2020-09-04 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/工具/">工具<span>3</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/grunt/">grunt<span>1</span></a></li>
+    </ul>
+	</div>
+	
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+    </div>
+  </div>
+  <div class="container-narrow">
+    <footer> <p>
+  &copy; 2020 ccsheller
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+<!-- syntax highlighting -->
+
+  <script>
+  marked.setOptions({
+    highlight: function (code, lang) {
+        return hljs.highlightAuto(code).value;
+    }
+  });
+  function Highlighting(){
+    var markdowns = document.getElementsByClassName('markdown');
+    for(var i=0;i<markdowns.length;i++){
+        if(markdowns[i].innerHTML) markdowns[i].innerHTML =marked(markdowns[i].innerHTML);
+    }
+  }
+  window.addEventListener('DOMContentLoaded', Highlighting, false);
+  window.addEventListener('load', Highlighting, false);
+  </script>
+
+
+</body>
+</html>
