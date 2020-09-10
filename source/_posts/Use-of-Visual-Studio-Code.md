@@ -79,6 +79,7 @@ za 切换代码折叠
 |Visual Studio IntelliCode| 跟据上下文的AI提示，无需配置。其他语言需要配置。
 |Prettier|  代码格式化
 |ESLint| 代码检测
+|Bracket Pair Colorizer 2| 匹配括号标记颜色
 
 #### 替换终端为git bash
 
