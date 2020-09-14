@@ -123,6 +123,30 @@ jsconfig.json 是项目配置文件
 
 这样vscode将会引入对应库类型申明，立即生效。如果没有效，等待片刻，vscode需要从网上自动同步数据。如果还是没效，可能需要重启下。重启没效果可能是网络问题，或者库还未公开支持（公开支持[查询](https://microsoft.github.io/TypeSearch/)）。
 
+也可以按照官网配置package.json，其将自动管理对应包的提示：
+
+```
+{
+  "dependencies": {
+    "lodash": "^4.17.0"
+  }
+}
+```
+
+也可以按照stackoverflow上的回答安装node的声明：
+
+```
+npm install --save @types/node
+```
+
+当然vs code能分析js文件，当require某个其识别的包后，其也能支持提示，比如：
+
+```
+const express = require('express')
+```
+
+哪种方式是合理的，无法判断。
+
 #### 全局变量和类型检查
 
 （引用文档）
