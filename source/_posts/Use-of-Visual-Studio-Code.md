@@ -88,6 +88,13 @@ za 切换代码折叠
 ```
 "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe"
 ```
+如果默认终端没有变，可以在终端面板的下拉列表框中选"Select Defalut Shell"，然后在弹出框中选择Git Bash
+
+如果调试Console没有切换为Git Bash，可以新建launch.json，其中添加
+
+```
+"console": "integratedTerminal"
+```
 
 #### Debug功能（node.js）
 
