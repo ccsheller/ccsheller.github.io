@@ -8,6 +8,8 @@ categories: 工具
 
 git 中有些命令，不常用，常遗忘
 
+<!--more-->
+
 ```
 $ git daemon --base-path=. --export-all --verbose
 $ git status --ignored
