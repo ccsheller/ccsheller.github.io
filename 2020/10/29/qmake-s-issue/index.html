@@ -3,15 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>git 备忘 | 代码考古</title>
+  <title>记qmake使用中遇到的问题 | 代码考古</title>
   <meta name="author" content="ccsheller">
   
-  <meta name="description" content="git 中有些命令，不常用，常遗忘">
+  <meta name="description" content="项目中的工程文件是用的qmake的pro文件。
+在使用中遇到了生成的路径字符串问题。
+项目有个主pro文件，TEMPLATE = subdirs，因此子目录可以用.file和.makefile文件来分别设置项目pro文件和生成的makefile位置。为了让任何生成文件都和源码分离（让项目代码整洁），将.makefile路径设置到了统一输出文件夹中。">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="git 备忘"/>
+  <meta property="og:title" content="记qmake使用中遇到的问题"/>
   <meta property="og:site_name" content="代码考古"/>
 
   
@@ -103,7 +105,7 @@
 
 	
 		<div class="page-header ">		
-			<h1 class="title "> git 备忘</h1>
+			<h1 class="title "> 记qmake使用中遇到的问题</h1>
 		</div>		
 	
 
@@ -123,10 +125,33 @@
 	<div class="mypage">		
 	  		
 
-	  <p>git 中有些命令，不常用，常遗忘</p>
+	  <p>项目中的工程文件是用的qmake的pro文件。</p>
+<p>在使用中遇到了生成的路径字符串问题。</p>
+<p>项目有个主pro文件，TEMPLATE = subdirs，因此子目录可以用.file和.makefile文件来分别设置项目pro文件和生成的makefile位置。为了让任何生成文件都和源码分离（让项目代码整洁），将.makefile路径设置到了统一输出文件夹中。</p>
 <a id="more"></a>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git daemon --base-path&#x3D;. --export-all --verbose</span><br><span class="line">$ git status --ignored</span><br><span class="line">$ git pull git:&#x2F;&#x2F;192.168.2.2&#x2F;.git --rebase --autostash master</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>qmake正常，但是make时报其pro找不到也没法生成。看了下生成的makefile，其依赖了pro文件，根据显示的目径，是找不到对应的pro的。</p>
+<ul>
+<li>换用.makefile路径中使用的变量，失败。</li>
+<li>换用.makefile路径改用相对路径，失败。</li>
+<li>将路径指到pro文件目录，成功。</li>
+<li>能否生成文件中不依赖pro文件（项目每次会重新生成makefile文件），没找到控制变量，失败。</li>
+<li>项目中定义了ordered，此变量是否能控制不依赖pro文件，失败。</li>
+<li>改变生成路径的嵌套层次，失败。</li>
+<li>将.file换用.subdir，失败。</li>
+<li>将路径指到pro文件目录，编译后自动删除makefile文件（脚本见后面），成功。</li>
+<li>查看qmake源码是否有控制变量（存在未文档化变量），找到一个QMAKE_PROJECT_DEPTH，调整其值。其只能控制嵌套的深度。失败。</li>
+</ul>
+<p>源码（qtbase/qmake/generators/makefile.cpp:MakefileGenerator::fileFixify）中了解，此处逻辑只会按照pro所在目录和生成makefile文件目录，向上找到一个共同的父目录，然后加上向上找的嵌套层次。因此生成makefile文件位置，没有调整的余地。</p>
+<h4 id="编译后自动删除makefile文件"><a href="#编译后自动删除makefile文件" class="headerlink" title="编译后自动删除makefile文件"></a>编译后自动删除makefile文件</h4><p>在想要清除makefile文件的目录的pro中添加（我们有一个统一的引入pri文件，所以放入其中）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># delete Makefile</span><br><span class="line">QMAKE_EXTRA_TARGETS +&#x3D; selfclean</span><br><span class="line">selfclean.commands &#x3D; -$(DEL_FILE) $(MAKEFILE)</span><br><span class="line">selfclean.CONFIG &#x3D; phony</span><br><span class="line"></span><br><span class="line">POST_TARGETDEPS +&#x3D; selfclean</span><br></pre></td></tr></table></figure>
+
+<p>QMAKE_EXTRA_TARGETS 添加了一个额外目标</p>
+<p>commands 是此目标的执行命令，此处就是删除makefile本身</p>
+<p>phony 指定此目标是一个伪目标，不会生成文件</p>
+<p>POST_TARGETDEPS 将目标依附到所有内置依赖的后面</p>
+<h4 id="得出结论"><a href="#得出结论" class="headerlink" title="得出结论"></a>得出结论</h4><p>子目录生成的makefile只能放在pro文件同目录或pro所在目录子目录。</p>
+<p>最终选择：将路径指到pro文件目录，编译后自动删除makefile文件。</p>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">	  
 	</div>
 
@@ -138,7 +163,7 @@
         <h1>推荐文章</h1>
         <ul>
             
-                <li><a href="http://ccshell.com/2020/10/29/qmake-s-issue/">记qmake使用中遇到的问题</a></li>
+                <li><a href="http://ccshell.com/2020/10/23/git-note/">git 备忘</a></li>
             
                 <li><a href="http://ccshell.com/2020/10/22/ubuntu-s-issue/">ubuntu使用遇到的问题</a></li>
             
@@ -156,14 +181,14 @@
 	<div class="pagination">
 <ul class="pagination">
 	 
-				
-    	<li class="prev"><a href="/2020/10/29/qmake-s-issue/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
-  		
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+        
 
         <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
 		
-		   <li class="next"><a href="/2020/10/22/ubuntu-s-issue/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+		   <li class="next"><a href="/2020/10/23/git-note/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
 	
 </ul>
@@ -213,7 +238,7 @@
 		   no_comment: "暂时还没有留言呢，点击下面的按钮去留言吧！",
 		   go_to_comment: "去留言",
 		   no_issue: "no_issue",
-		   issue_title: "git 备忘",
+		   issue_title: "记qmake使用中遇到的问题",
 		   issue_id: "",
 		   btn_class: "btn btn-primary",
 		   comments_target: "#comment-thread",
@@ -234,7 +259,7 @@
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	2020-10-23 
+	2020-10-29 
 	</div>
 	
 
@@ -258,7 +283,7 @@
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/git/">git<span>1</span></a></li>
+  <li><a href="/tags/qmake/">qmake<span>2</span></a></li>
     </ul>
 	</div>
 	
