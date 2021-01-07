@@ -51,7 +51,7 @@
 
 
 
-<meta name="generator" content="Hexo 5.0.0"></head>
+<meta name="generator" content="Hexo 5.3.0"></head>
 
 <body>
   <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
@@ -133,16 +133,13 @@
 <p>找了文档，xrdp 加 mate 桌面，终于可用了。看习惯高分屏的界面，mate这种还是有点不习惯，还可接受。</p>
 <p>装上VS Code，运行不起来，将其在终端中运行，提示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Xlib:  extension &quot;XInputExtension&quot; missing on display &quot;:1&quot;.</span><br></pre></td></tr></table></figure>
-
 <p>搜索得知是Electron的问题，如下修改：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;</span><br><span class="line">cp libxcb.so.1 libxcb.so.1.bak</span><br><span class="line">sudo sed -i &#39;s&#x2F;BIG-REQUESTS&#x2F;_IG-REQUESTS&#x2F;&#39; libxcb.so.1</span><br></pre></td></tr></table></figure>
-
 <p>使用时还有个问题，中文输入法始终不起作用，配置远程桌面的文章提到过输入法的问题，不想看了。</p>
 <p>多次尝试还是不行，想换用谷歌输入法，好像没有linux版的。那试试搜狗输入法（广告嫌疑）吧，结果很好用，切换成五笔，终于可用了。</p>
 <p>搜狗输入法安装：</p>
 <p>官网下载deb，然后终端中执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt remove fcitx* &amp;&amp; sudo apt autoremove</span><br><span class="line">sudo dpkg -i ~&#x2F;Downloads&#x2F;sogoupinyin*.deb; sudo apt -f install</span><br></pre></td></tr></table></figure>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">	  
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt remove fcitx* &amp;&amp; sudo apt autoremove</span><br><span class="line">sudo dpkg -i ~&#x2F;Downloads&#x2F;sogoupinyin*.deb; sudo apt -f install</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">	  
 	</div>
 
 	<!-- recommended posts -->

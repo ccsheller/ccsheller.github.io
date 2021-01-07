@@ -52,7 +52,7 @@ grunt是一个JaveScript版的任务运行工具。">
 
 
 
-<meta name="generator" content="Hexo 5.0.0"></head>
+<meta name="generator" content="Hexo 5.3.0"></head>
 
 <body>
   <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
@@ -132,13 +132,10 @@ grunt是一个JaveScript版的任务运行工具。">
 <p>此命令并不会安装grunt，其会从项目目录开始找最接近的grunt执行</p>
 <p>最简单执行npm，来安装grunt配置package.json</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install grunt --save-dev</span><br></pre></td></tr></table></figure>
-
 <p>根据情况修改package.json依赖的grunt版本</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;my-project-name&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;0.1.0&quot;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;grunt&quot;: &quot;~0.4.5&quot;,</span><br><span class="line">    &quot;grunt-contrib-jshint&quot;: &quot;~0.10.0&quot;,</span><br><span class="line">    &quot;grunt-contrib-nodeunit&quot;: &quot;~0.4.1&quot;,</span><br><span class="line">    &quot;grunt-contrib-uglify&quot;: &quot;~0.5.0&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>如果现有项目配置好了grunt，直接执行</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
 <p>现在需要配置Gruntfile，对应文件Gruntfile.js 或 Gruntfile.coffee</p>
 <h4 id="Gruntfile"><a href="#Gruntfile" class="headerlink" title="Gruntfile"></a>Gruntfile</h4><p>Gruntfile 由下面几个部分主成：</p>
 <ul>
@@ -149,26 +146,19 @@ grunt是一个JaveScript版的任务运行工具。">
 </ul>
 <h5 id="封装器-wrapper-函数"><a href="#封装器-wrapper-函数" class="headerlink" title="封装器(wrapper)函数"></a>封装器(wrapper)函数</h5><p>所有代码都要放在里面</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; function(grunt) &#123;</span><br><span class="line">  &#x2F;&#x2F; Do grunt-related things in here</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <h5 id="项目和任务的配置"><a href="#项目和任务的配置" class="headerlink" title="项目和任务的配置"></a>项目和任务的配置</h5><p>将配置数据作为对象传给grunt.initConfig。<br>对象创建可以使用任何JS语法。其中可用&lt;% %&gt;引用任何配置属性</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">grunt.initConfig(&#123;</span><br><span class="line">  pkg: grunt.file.readJSON(&#39;package.json&#39;),</span><br><span class="line">  uglify: &#123;</span><br><span class="line">    options: &#123;</span><br><span class="line">      banner: &#39;&#x2F;*! &lt;%&#x3D; pkg.name %&gt; &lt;%&#x3D; grunt.template.today(&quot;yyyy-mm-dd&quot;) %&gt; *&#x2F;\n&#39;</span><br><span class="line">    &#125;,</span><br><span class="line">    build: &#123;</span><br><span class="line">      src: &#39;src&#x2F;&lt;%&#x3D; pkg.name %&gt;.js&#39;,</span><br><span class="line">      dest: &#39;build&#x2F;&lt;%&#x3D; pkg.name %&gt;.min.js&#39;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
-
 <h5 id="需要载入的Grunt插件和任务"><a href="#需要载入的Grunt插件和任务" class="headerlink" title="需要载入的Grunt插件和任务"></a>需要载入的Grunt插件和任务</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Load the plugin that provides the &quot;uglify&quot; task.</span><br><span class="line">grunt.loadNpmTasks(&#39;grunt-contrib-uglify&#39;);</span><br></pre></td></tr></table></figure>
-
 <h5 id="自定义任务"><a href="#自定义任务" class="headerlink" title="自定义任务"></a>自定义任务</h5><p>可以定义一到多个任务，默认任务指定default</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt.registerTask(&#39;default&#39;, [&#39;uglify&#39;]);</span><br></pre></td></tr></table></figure>
 <p>或</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grunt.registerTask(&#39;default&#39;, &#39;Log some stuff.&#39;, function() &#123;</span><br><span class="line">    grunt.log.write(&#39;Logging some stuff...&#39;).ok();</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-
 <p>还可以载入外部任务</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt.loadTasks</span><br></pre></td></tr></table></figure>
-
 <p>完整例子</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; function(grunt) &#123;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; Project configuration.</span><br><span class="line">  grunt.initConfig(&#123;</span><br><span class="line">    pkg: grunt.file.readJSON(&#39;package.json&#39;),</span><br><span class="line">    uglify: &#123;</span><br><span class="line">      options: &#123;</span><br><span class="line">        banner: &#39;&#x2F;*! &lt;%&#x3D; pkg.name %&gt; &lt;%&#x3D; grunt.template.today(&quot;yyyy-mm-dd&quot;) %&gt; *&#x2F;\n&#39;</span><br><span class="line">      &#125;,</span><br><span class="line">      build: &#123;</span><br><span class="line">        src: &#39;src&#x2F;&lt;%&#x3D; pkg.name %&gt;.js&#39;,</span><br><span class="line">        dest: &#39;build&#x2F;&lt;%&#x3D; pkg.name %&gt;.min.js&#39;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; Load the plugin that provides the &quot;uglify&quot; task.</span><br><span class="line">  grunt.loadNpmTasks(&#39;grunt-contrib-uglify&#39;);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; Default task(s).</span><br><span class="line">  grunt.registerTask(&#39;default&#39;, [&#39;uglify&#39;]);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>配置好的项目，可以运行了</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt</span><br></pre></td></tr></table></figure>
-
 <h4 id="Gruntfile-输写"><a href="#Gruntfile-输写" class="headerlink" title="Gruntfile 输写"></a>Gruntfile 输写</h4><p>确定需求，找对应插件或自己写</p>
 <ul>
 <li>想监视文件变动<ul>
