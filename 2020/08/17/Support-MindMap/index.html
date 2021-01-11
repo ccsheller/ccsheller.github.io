@@ -129,7 +129,7 @@
 <p>输出结果很好，页面往下翻，首页居然出现了5个同样的思维图。难道是我有5个节点？查看dev tool，有5个svg生成。删去生成的首页中一个节点，思维图没变化且还是5个图，说明hexo有缓存，找了下hexo缓存位置，删除db.json也没效果且会重新生成。再想想不应该是节点导致的，其他使用这个插件的也没这个现象，检查下index内容，发现其引入相关javascript脚本5次，那就是执行了5次，生成了5副图，再数下首页文章正好有5篇。</p>
 <p>为什么每篇都引入了一份脚本，查了下hexo-simple-mindmap源码，其利用了hexo的after_post_render过滤器。查了下hexo文档没有其他合适的过滤器，事件之类处理。如果在after_post_render处理中进行字符串查找关键字后放弃除第一次的脚本追加，感觉这样不合适。配好vs code调试，打上断点，其调用栈层太多改动意义不大。</p>
 <p>当然我也注意到，正常显示的首页，文章内容都是摘要形式的。可能是摘要时，hexo的render过程会不同。再次检查hexo和主题的配置没有发现摘要控制项（之前我都看过几遍了），比对其他人的配置，也没发现区别。最后查到有人回答说添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
 <p>之前的内容就成了摘要。尝试后相关输出变少了，于是给每篇都加上了标记。</p>
 <p>这也有缺陷，每篇不论内容多寡都要加上标记，且标记前还要写上些文字。</p>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">	  

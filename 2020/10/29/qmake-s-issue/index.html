@@ -144,7 +144,7 @@
 </ul>
 <p>源码（qtbase/qmake/generators/makefile.cpp:MakefileGenerator::fileFixify）中了解，此处逻辑只会按照pro所在目录和生成makefile文件目录，向上找到一个共同的父目录，然后加上向上找的嵌套层次。因此生成makefile文件位置，没有调整的余地。</p>
 <h4 id="编译后自动删除makefile文件"><a href="#编译后自动删除makefile文件" class="headerlink" title="编译后自动删除makefile文件"></a>编译后自动删除makefile文件</h4><p>在想要清除makefile文件的目录的pro中添加（我们有一个统一的引入pri文件，所以放入其中）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># delete Makefile</span><br><span class="line">QMAKE_EXTRA_TARGETS +&#x3D; selfclean</span><br><span class="line">selfclean.commands &#x3D; -$(DEL_FILE) $(MAKEFILE)</span><br><span class="line">selfclean.CONFIG &#x3D; phony</span><br><span class="line"></span><br><span class="line">POST_TARGETDEPS +&#x3D; selfclean</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># delete Makefile</span><br><span class="line">QMAKE_EXTRA_TARGETS +&#x3D; selfclean</span><br><span class="line">selfclean.commands &#x3D; -$(DEL_FILE) $(MAKEFILE)</span><br><span class="line">selfclean.CONFIG &#x3D; phony</span><br><span class="line"></span><br><span class="line">POST_TARGETDEPS +&#x3D; selfclean</span><br></pre></td></tr></table></figure>
 <p>QMAKE_EXTRA_TARGETS 添加了一个额外目标</p>
 <p>commands 是此目标的执行命令，此处就是删除makefile本身</p>
 <p>phony 指定此目标是一个伪目标，不会生成文件</p>
