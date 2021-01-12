@@ -16,3 +16,10 @@ $ git status --ignored
 $ git pull git://192.168.2.2/.git --rebase --autostash master
 
 ```
+
+
+给项目添加 **.gitattributes** 文件后，源码文件会变为修改状态。试了几个方案没解决，先做个备注，[github这个帮助感觉靠谱](https://docs.github.com/en/free-pro-team@latest/github/using-git/configuring-git-to-handle-line-endings)
+
+```
+$ git add --renormalize .
+```
