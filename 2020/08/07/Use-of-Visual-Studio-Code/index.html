@@ -1,0 +1,504 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Visual Studio Code 的使用 | 代码考古</title>
+  <meta name="author" content="ccsheller">
+  
+  <meta name="description" content="VS Code都说牛，其给我的感觉就是功能太丰富，抓不住核心。其中智能提示只显示当前文件内容，搜索一翻，有的说用TSD，有的说用Typings。我就用来学JavaScript，书上的例子，感觉不到变化，反正是没搞明白。换用WebStorm，也没明显的区别，还折腾了好久的主题（喜欢Linux terminal emulator中取消系统配色后的淡黄色），还启动慢，太臃肿。换回VS Code，为此需要弄清其使用，怎么配置好intellisense，其WorkSpace有什么功能性的必要，.vscode文件是否在项目中的必要。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Visual Studio Code 的使用"/>
+  <meta property="og:site_name" content="代码考古"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/cosmo.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight-default.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+  <![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  
+    <script src="/js/marked.js"></script>
+    <script src="/js/comment.js"></script>
+    <script src="/js/timeago.min.js"></script>
+    <script src="/js/highlight.min.js"></script>
+	<script src="/js/spin.min.js"></script>
+  
+  <!-- analytics -->
+  
+
+
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body>
+  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">代码考古</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+    <div class="content">
+      
+
+
+	
+		<div class="page-header ">		
+			<h1 class="title "> Visual Studio Code 的使用</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>VS Code都说牛，其给我的感觉就是功能太丰富，抓不住核心。其中智能提示只显示当前文件内容，搜索一翻，有的说用TSD，有的说用Typings。我就用来学JavaScript，书上的例子，感觉不到变化，反正是没搞明白。换用WebStorm，也没明显的区别，还折腾了好久的主题（喜欢Linux terminal emulator中取消系统配色后的淡黄色），还启动慢，太臃肿。换回VS Code，为此需要弄清其使用，怎么配置好intellisense，其WorkSpace有什么功能性的必要，.vscode文件是否在项目中的必要。</p>
+<span id="more"></span>
+
+<p>工具用的顺手还是要读文档。此文记录读文档时，觉得重要的内容。</p>
+<h4 id="改设置"><a href="#改设置" class="headerlink" title="改设置"></a>改设置</h4><p>MenuBar -&gt; File -&gt; Preferences</p>
+<h4 id="各种选择模式，列编辑"><a href="#各种选择模式，列编辑" class="headerlink" title="各种选择模式，列编辑"></a>各种选择模式，列编辑</h4><p>这快捷键有点复杂，直接装Vim扩展（也可以装Spacemacs），hjkl就导航了，v和ctrl + v 就选择了。</p>
+<p>= 格式化</p>
+<p>za 切换代码折叠</p>
+<h4 id="Ctrl-快捷键和Vim冲突"><a href="#Ctrl-快捷键和Vim冲突" class="headerlink" title="Ctrl 快捷键和Vim冲突"></a>Ctrl 快捷键和Vim冲突</h4><p>在Settings中搜索vim handle keys，点击Edit in settings.json，对于要屏蔽的项添加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;vim.handleKeys&quot;: &#123;</span><br><span class="line">    &quot;&lt;C-a&gt;&quot;: false,</span><br><span class="line">    &quot;&lt;C-f&gt;&quot;: false</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Ctrl + o windows习惯用Ctrl来打开文件（Linux Vim 列出文件夹文件不好用，Spacemacs相对好不少）。因此屏蔽Vim的Ctrl + o</li>
+<li>Ctrl + b</li>
+</ul>
+<h4 id="Ctrl-Space-提示与系统冲突"><a href="#Ctrl-Space-提示与系统冲突" class="headerlink" title="Ctrl Space 提示与系统冲突"></a>Ctrl Space 提示与系统冲突</h4><p>找到Preferences下的Keyboard Shortcuts搜Ctrl Space，鼠标移入想修改项后点击前面的笔，在弹出撒个框中按想设置的快捷键，我设定为 Ctrl + Alt + Space。如果提示重复就按回车。</p>
+<h4 id="代码片断输入"><a href="#代码片断输入" class="headerlink" title="代码片断输入"></a>代码片断输入</h4><p>在输入过程中可以跟据提示选择项目后按tab快速输入一个对应的片断，并用tab在输入片断内切换位置。比如输入try，选择trycatch，按tab。</p>
+<h4 id="Emmet的支持"><a href="#Emmet的支持" class="headerlink" title="Emmet的支持"></a>Emmet的支持</h4><h4 id="输入检查"><a href="#输入检查" class="headerlink" title="输入检查"></a>输入检查</h4><p>设定中搜索check js，启用它</p>
+<h4 id="原生快捷键"><a href="#原生快捷键" class="headerlink" title="原生快捷键"></a>原生快捷键</h4><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Alt + ←</td>
+<td>前一个编辑位置</td>
+</tr>
+<tr>
+<td>Alt + →</td>
+<td>后一个编辑位置</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + b</td>
+<td>切换侧边栏显示</td>
+</tr>
+<tr>
+<td>Ctrl + num</td>
+<td>切换编辑组</td>
+</tr>
+<tr>
+<td>Alt + num</td>
+<td>切换编辑文件</td>
+</tr>
+<tr>
+<td>Ctrl + Tab</td>
+<td>当前编辑组中切换文件</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + p</td>
+<td>搜索并打开文件</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + p</td>
+<td>命令面板</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + o</td>
+<td>根据Symbol在当前文件搜索，可以快速跳转</td>
+</tr>
+<tr>
+<td>Alt + F12</td>
+<td>Symbol窥视</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>F2</td>
+<td>重构重命名</td>
+</tr>
+<tr>
+<td>F8</td>
+<td>错误和警告导航</td>
+</tr>
+</tbody></table>
+<h4 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h4><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Visual Studio IntelliCode</td>
+<td>跟据上下文的AI提示，无需配置。其他语言需要配置。</td>
+</tr>
+<tr>
+<td>Prettier</td>
+<td>代码格式化</td>
+</tr>
+<tr>
+<td>ESLint</td>
+<td>代码检测</td>
+</tr>
+<tr>
+<td>Bracket Pair Colorizer 2</td>
+<td>匹配括号标记颜色</td>
+</tr>
+</tbody></table>
+<h4 id="替换终端为git-bash"><a href="#替换终端为git-bash" class="headerlink" title="替换终端为git bash"></a>替换终端为git bash</h4><p>在设置文件setting.json（在设置中搜Automation Shell: Windows，点Edit in setting.json），补全条目到bash目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;terminal.integrated.shell.windows&quot;: &quot;C:\\Program Files\\Git\\bin\\bash.exe&quot;</span><br></pre></td></tr></table></figure>
+<p>如果默认终端没有变，可以在终端面板的下拉列表框中选”Select Defalut Shell”，然后在弹出框中选择Git Bash</p>
+<p>如果调试Console没有切换为Git Bash，可以新建launch.json，其中添加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;console&quot;: &quot;integratedTerminal&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Debug功能（node-js）"><a href="#Debug功能（node-js）" class="headerlink" title="Debug功能（node.js）"></a>Debug功能（node.js）</h4><p>节选doc</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">You will need to create a debugger configuration file launch.json for your Express application. Click on the Run icon in the Activity Bar and then the Configure gear icon at the top of the Run view to create a default launch.json file. Select the Node.js environment by ensuring that the type property in configurations is set to &quot;node&quot;. When the file is first created, VS Code will look in package.json for a start script and will use that value as the program (which in this case is &quot;$&#123;workspaceFolder&#125;\\bin\\www) for the Launch Program configuration.</span><br><span class="line"></span><br><span class="line">Save the new file and make sure Launch Program is selected in the configuration drop-down at the top of the Run view. Open app.js and set a breakpoint near the top of the file where the Express app object is created by clicking in the gutter to the left of the line number. Press F5 to start debugging the application.</span><br></pre></td></tr></table></figure>
+
+<h4 id="JavaScript-项目"><a href="#JavaScript-项目" class="headerlink" title="JavaScript 项目"></a>JavaScript 项目</h4><p>jsconfig.json 是项目配置文件</p>
+<p>判断一个js文件是否属于项目，打开此文件执行命令JavaScript: Go to Project Configuration</p>
+<p>实现分项目控制，每个项目需要自己的jsconfig.json</p>
+<h4 id="智能提示"><a href="#智能提示" class="headerlink" title="智能提示"></a>智能提示</h4><p>编写代码时，没有对应智能提示需要在jsconfig.json中添加如下配置（以nodejs为例）:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;typeAcquisition&quot;: &#123;</span><br><span class="line">        &quot;include&quot;: [</span><br><span class="line">            &quot;node&quot;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样vscode将会引入对应库类型申明，立即生效。如果没有效，等待片刻，vscode需要从网上自动同步数据。如果还是没效，可能需要重启下。重启没效果可能是网络问题，或者库还未公开支持（公开支持<a target="_blank" rel="noopener" href="https://microsoft.github.io/TypeSearch/">查询</a>）。</p>
+<p>也可以按照官网配置package.json，其将自动管理对应包的提示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">    &quot;lodash&quot;: &quot;^4.17.0&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可以按照stackoverflow上的回答安装node的声明：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install --save @types&#x2F;node</span><br></pre></td></tr></table></figure>
+
+<p>当然vs code能分析js文件，当require某个其识别的包后，其也能支持提示，比如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const express &#x3D; require(&#39;express&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>哪种方式是合理的，无法判断。</p>
+<h4 id="全局变量和类型检查"><a href="#全局变量和类型检查" class="headerlink" title="全局变量和类型检查"></a>全局变量和类型检查</h4><p>（引用文档）</p>
+<p>Let’s say that you are working in legacy JavaScript code that uses global variables or non-standard DOM APIs:<br> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">window.onload &#x3D; function() &#123;</span><br><span class="line">  if (window.webkitNotifications.requestPermission() &#x3D;&#x3D;&#x3D; CAN_NOTIFY) &#123;</span><br><span class="line">    window.webkitNotifications.createNotification(null, &#39;Woof!&#39;, &#39;🐶&#39;).show();</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    alert(&#39;Could not notify&#39;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><br>If you try to use // @ts-check with the above code, you’ll see a number of errors about the use of global variables:</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Line 2 - Property &#39;webkitNotifications&#39; does not exist on type &#39;Window&#39;.</span><br><span class="line">Line 2 - Cannot find name &#39;CAN_NOTIFY&#39;.</span><br><span class="line">Line 3 - Property &#39;webkitNotifications&#39; does not exist on type &#39;Window&#39;.</span><br></pre></td></tr></table></figure>
+<p>If you want to continue using // @ts-check but are confident that these are not actual issues with your application, you have to let TypeScript know about these global variables.</p>
+<p>To start, create a jsconfig.json at the root of your project:</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;compilerOptions&quot;: &#123;&#125;,</span><br><span class="line">  &quot;exclude&quot;: [&quot;node_modules&quot;, &quot;**&#x2F;node_modules&#x2F;*&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Then reload VS Code to make sure the change is applied. The presence of a jsconfig.json lets TypeScript know that your Javascript files are part of a larger project.</p>
+<p>Now create a globals.d.ts file somewhere your workspace:</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">interface Window &#123;</span><br><span class="line">  webkitNotifications: any;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">declare var CAN_NOTIFY: number;</span><br></pre></td></tr></table></figure>
+<p>d.ts files are type declarations. In this case, globals.d.ts lets TypeScript know that a global CAN_NOTIFY exists and that a webkitNotifications property exists on window. You can read more about writing d.ts in the TypeScript documentation. d.ts files do not change how JavaScript is evaluated, they are used only for providing better JavaScript language support.</p>
+<h4 id="支持的两种设置作用域"><a href="#支持的两种设置作用域" class="headerlink" title="支持的两种设置作用域"></a>支持的两种设置作用域</h4><p>用户设置（User Settings） 全局有效</p>
+<p>工作空间设置（Workspace Settings） 当前工作工间有效，存于当前项目根目录下的.vscode目录中。</p>
+<p>打开设置（File &gt; Preferences &gt; Settings，Ctrl + ,）,可以进行两种切换。</p>
+<p>只影响当前项目的设置或者需要项目组中共享的设置可以放到工作空间设置。</p>
+<p>安全原因，如下设置在工作空间设置被忽略：</p>
+<ul>
+<li>git.path</li>
+<li>terminal.external.windowsExec</li>
+<li>terminal.external.osxExec</li>
+<li>terminal.external.linuxExec</li>
+</ul>
+<h4 id="多根工作空间（Multi-root-Workspaces）"><a href="#多根工作空间（Multi-root-Workspaces）" class="headerlink" title="多根工作空间（Multi-root Workspaces）"></a>多根工作空间（Multi-root Workspaces）</h4><p>有多个相关项目时，可以同时打开多个项目目录，然后保存工作空间（.code-workspace），保存位置自己定，以后就可以用这个工作空间文件一次打开多个项目。</p>
+<p>节选.code-workspace内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;folders&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &#x2F;&#x2F; Source code</span><br><span class="line">      &quot;name&quot;: &quot;Product&quot;,</span><br><span class="line">      &quot;path&quot;: &quot;vscode&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &#x2F;&#x2F; Docs and release notes</span><br><span class="line">      &quot;name&quot;: &quot;Documentation&quot;,</span><br><span class="line">      &quot;path&quot;: &quot;vscode-docs&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &#x2F;&#x2F; Yeoman extension generator</span><br><span class="line">      &quot;name&quot;: &quot;Extension generator&quot;,</span><br><span class="line">      &quot;path&quot;: &quot;vscode-generator-code&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>支持注释，命名（将代替文件夹名显示），路径指到项目根目录（建议相对路径，变于分享），支持设置（可以添加settings节），支持compounds、launch、tasks、extensions</p>
+<p>限定搜索的项目，搜索框先输入./,比如只搜索project1中的.js，可以输入./project1/*<em>/</em>.js</p>
+<h4 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h4><ul>
+<li>提取方法</li>
+<li>提取变量</li>
+<li>符号重命名</li>
+</ul>
+<h4 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h4><p>配置文件tasks.json在工作空间配置文件夹下.vscode</p>
+<h4 id="TypeSearch"><a href="#TypeSearch" class="headerlink" title="TypeSearch"></a>TypeSearch</h4><p>查询Type是否支持智能提示<a target="_blank" rel="noopener" href="https://microsoft.github.io/TypeSearch/">TypeSearch</a></p>
+<h4 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h4><p>支持 JSDoc</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">	  
+	</div>
+
+	<!-- recommended posts -->
+	
+		
+
+    <div class="recommended_posts">
+        <h1>推荐文章</h1>
+        <ul>
+            
+                <li><a href="https://ccsheller.github.io/2020/08/17/Support-MindMap/">支持思维导图</a></li>
+            
+                <li><a href="https://ccsheller.github.io/2020/08/16/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AF%BB%E6%87%82%E8%B4%A2%E6%8A%A5/">一本书读懂财报</a></li>
+            
+                <li><a href="https://ccsheller.github.io/2020/08/07/Change-theme-to-freemind/">更改主题为freemind</a></li>
+            
+                <li><a href="https://ccsheller.github.io/2020/08/01/hexo%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/">hexo安装记录</a></li>
+            
+        </ul>
+    </div>
+
+	
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2020/08/16/一本书读懂财报/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2020/08/07/Change-theme-to-freemind/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+    	 
+	 <div id="comment-thread"></div>
+	 <div id="loading-spin"></div>
+	 <script type="text/javascript">
+	   getComments({
+           type: "github" ? "github" : "github",       
+	       user: "ccsheller",
+	       repo: "ccsheller.github.io",
+		   client_id: "",
+           client_secret: "",
+		   no_comment: "暂时还没有留言呢，点击下面的按钮去留言吧！",
+		   go_to_comment: "去留言",
+		   no_issue: "no_issue",
+		   issue_title: "Visual Studio Code 的使用",
+		   issue_id: "",
+		   btn_class: "btn btn-primary",
+		   comments_target: "#comment-thread",
+		   loading_target: "#loading_spin"
+		   });
+	 </script>
+  
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2020-08-07 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/工具/">工具<span>9</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Visual-Studio-Code/">Visual Studio Code<span>1</span></a></li>
+    </ul>
+	</div>
+	
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+    </div>
+  </div>
+  <div class="container-narrow">
+    <footer> <p>
+  &copy; 2023 ccsheller
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+<!-- syntax highlighting -->
+
+  <script>
+  marked.setOptions({
+    highlight: function (code, lang) {
+        return hljs.highlightAuto(code).value;
+    }
+  });
+  function Highlighting(){
+    var markdowns = document.getElementsByClassName('markdown');
+    for(var i=0;i<markdowns.length;i++){
+        if(markdowns[i].innerHTML) markdowns[i].innerHTML =marked(markdowns[i].innerHTML);
+    }
+  }
+  window.addEventListener('DOMContentLoaded', Highlighting, false);
+  window.addEventListener('load', Highlighting, false);
+  </script>
+
+
+</body>
+</html>

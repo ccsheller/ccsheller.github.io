@@ -1,0 +1,363 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>qmake 在windows上判断msvc环境有问题 | 代码考古</title>
+  <meta name="author" content="ccsheller">
+  
+  <meta name="description" content="测试那边需要32位的版本。脚本是一定程度支持编32位的，脚本调整下后，build，结果qmake生成的makefile名字还是64位的。
+看来qmake（qt是64位）不能从vcvarsall.bat中决定要编32位，难道需要加什么参数。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="qmake 在windows上判断msvc环境有问题"/>
+  <meta property="og:site_name" content="代码考古"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/cosmo.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight-default.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+  <![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  
+    <script src="/js/marked.js"></script>
+    <script src="/js/comment.js"></script>
+    <script src="/js/timeago.min.js"></script>
+    <script src="/js/highlight.min.js"></script>
+	<script src="/js/spin.min.js"></script>
+  
+  <!-- analytics -->
+  
+
+
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body>
+  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">代码考古</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+    <div class="content">
+      
+
+
+	
+		<div class="page-header ">		
+			<h1 class="title "> qmake 在windows上判断msvc环境有问题</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>测试那边需要32位的版本。脚本是一定程度支持编32位的，脚本调整下后，build，结果qmake生成的makefile名字还是64位的。</p>
+<p>看来qmake（qt是64位）不能从vcvarsall.bat中决定要编32位，难道需要加什么参数。</p>
+<span id="more"></span>
+
+<p>一通查找，找到一个qmake选项-spec，一个环境变量QMAKESPEC，一个内部变量QMAKE_TARGET.arch，都不好用。qmake -query QMAKE_MKSPECS 在qt5中已经失效了。在其mkspecs目录中，也只有win32-msvc2015，经查qt将32位和64位统一在一份配置中了。</p>
+<p>于是运行vcvarsall.bat x86，输出PATH，看了下没有想像中的一些路径信息，比如VC，x86, include</p>
+<p>于是分析了下qmake源码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void QMakeEvaluator::loadDefaults()</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">        vars[ProKey(&quot;QMAKE_TARGET.arch&quot;)] &#x3D; msvcArchitecture(</span><br><span class="line">                vcInstallDir,</span><br><span class="line">                m_option-&gt;getEnv(QLatin1String(&quot;PATH&quot;)));</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">static ProString defaultMsvcArchitecture()</span><br><span class="line">&#123;</span><br><span class="line">#if defined(Q_OS_WIN64)</span><br><span class="line">    return ProString(&quot;x86_64&quot;);</span><br><span class="line">#else</span><br><span class="line">    return ProString(&quot;x86&quot;);</span><br><span class="line">#endif</span><br><span class="line">&#125;</span><br><span class="line">static ProString msvcArchitecture(const QString &amp;vcInstallDir, const QString &amp;pathVar)</span><br><span class="line">&#123;</span><br><span class="line">    if (vcInstallDir.isEmpty())</span><br><span class="line">        return defaultMsvcArchitecture();</span><br><span class="line">    QString vcBinDir &#x3D; vcInstallDir;</span><br><span class="line">    if (vcBinDir.endsWith(QLatin1Char(&#39;\\&#39;)))</span><br><span class="line">        vcBinDir.chop(1);</span><br><span class="line">    const auto dirs &#x3D; pathVar.split(QLatin1Char(&#39;;&#39;));</span><br><span class="line">    for (const QString &amp;dir : dirs) &#123;</span><br><span class="line">        if (!dir.startsWith(vcBinDir, Qt::CaseInsensitive))</span><br><span class="line">            continue;</span><br><span class="line">        const ProString arch &#x3D; msvcBinDirToQMakeArch(dir.mid(vcBinDir.length() + 1));</span><br><span class="line">        if (!arch.isEmpty())</span><br><span class="line">            return arch;</span><br><span class="line">    &#125;</span><br><span class="line">    return defaultMsvcArchitecture();</span><br><span class="line">&#125;</span><br><span class="line">static ProString msvcBinDirToQMakeArch(QString subdir)</span><br><span class="line">&#123;</span><br><span class="line">    int idx &#x3D; subdir.indexOf(QLatin1Char(&#39;\\&#39;));</span><br><span class="line">    if (idx &#x3D;&#x3D; -1)</span><br><span class="line">        return ProString(&quot;x86&quot;);</span><br><span class="line">    subdir.remove(0, idx + 1);</span><br><span class="line">    idx &#x3D; subdir.indexOf(QLatin1Char(&#39;_&#39;));</span><br><span class="line">    if (idx &gt;&#x3D; 0)</span><br><span class="line">        subdir.remove(0, idx + 1);</span><br><span class="line">    subdir &#x3D; subdir.toLower();</span><br><span class="line">    if (subdir &#x3D;&#x3D; QLatin1String(&quot;amd64&quot;))</span><br><span class="line">        return ProString(&quot;x86_64&quot;);</span><br><span class="line">    &#x2F;&#x2F; Since 2017 the folder structure from here is HostX64|X86&#x2F;x64|x86</span><br><span class="line">    idx &#x3D; subdir.indexOf(QLatin1Char(&#39;\\&#39;));</span><br><span class="line">    if (idx &#x3D;&#x3D; -1)</span><br><span class="line">        return ProString(&quot;x86&quot;);</span><br><span class="line">    subdir.remove(0, idx + 1);</span><br><span class="line">    if (subdir &#x3D;&#x3D; QLatin1String(&quot;x64&quot;))</span><br><span class="line">        return ProString(&quot;x86_64&quot;);</span><br><span class="line">    return ProString(subdir);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其取了环境变量PATH的值，它会过滤出含有VC安装目录的路径，然后判断结尾目录名字决定是x86或x86_64。</p>
+<p>明显它总是输出x86_64，现在就两个疑问了，vcvarsall.bat x86为什么没有设置合理的路径，难道配置的环境有问题；qmake只有找到amd64目录时才会输出x86_64，那amd64来自哪里。</p>
+<p>先解决第一个疑问，分析vcvarsall.bat代码，运行并回显，下面代码解决了第一个疑问</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@if not &quot;%WindowsSdkDir%&quot; &#x3D;&#x3D; &quot;&quot; @set PATH&#x3D;%WindowsSdkDir%bin\x86;%PATH%</span><br></pre></td></tr></table></figure>
+
+<p>其中%WindowsSdkDir%对应到</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\Program Files (x86)\Windows Kits\10</span><br></pre></td></tr></table></figure>
+
+<p>记得装VS2015时，勾选了SDK 10。这就说通了，VS在有SDK时用了SDK的库。此时qmake这边其实不知道这个情况，它在这里有缺陷。</p>
+<p>那qmake怎么得到x86_64的，再次检查qmake源码，明白了，其在不能确认环境时，返回默认值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">static ProString defaultMsvcArchitecture()</span><br><span class="line">&#123;</span><br><span class="line">#if defined(Q_OS_WIN64)</span><br><span class="line">    return ProString(&quot;x86_64&quot;);</span><br><span class="line">#else</span><br><span class="line">    return ProString(&quot;x86&quot;);</span><br><span class="line">#endif</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此默认值在编译时已经确定了。</p>
+<p>那我能在.pro文件中根据情况修改QMAKE_TARGET.arch值到x86，是否可行。编译之初很好，等待一会后就报错了。</p>
+<p>注意到终端中输出，有宏定义为WIN64，说明qmake还是以64位环境运行。记得在qmake的配置文件msvc-desktop.conf有这样的语句</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">contains(QMAKE_TARGET.arch, x86_64) &#123;</span><br><span class="line">    DEFINES +&#x3D; WIN64</span><br><span class="line">    QMAKE_COMPILER_DEFINES +&#x3D; _WIN64</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这说明qmake在解析.pro文件之前就读取了conf文件。</p>
+<p>看来强制改QMAKE_TARGET.arch行不通。</p>
+<p>最后还是再装个qt32位环境，调整脚本顺利编译。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">	  
+	</div>
+
+	<!-- recommended posts -->
+	
+		
+
+    <div class="recommended_posts">
+        <h1>推荐文章</h1>
+        <ul>
+            
+                <li><a href="https://ccsheller.github.io/2023/03/03/xfc4%E5%9C%A8%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E4%B8%8B%E9%9A%8F%E6%9C%BA%E4%BC%91%E7%9C%A0%E9%97%AE%E9%A2%98/">xfc4在远程桌面下随机休眠问题</a></li>
+            
+                <li><a href="https://ccsheller.github.io/2021/01/11/npm-install-fails/">npm 安装包时，失败问题</a></li>
+            
+                <li><a href="https://ccsheller.github.io/2021/01/07/Detect-Visual-Studio-compilation-slow/">记查找Visual Studio 编译慢的原因</a></li>
+            
+                <li><a href="https://ccsheller.github.io/2020/10/29/qmake-s-issue/">记qmake使用中遇到的问题</a></li>
+            
+        </ul>
+    </div>
+
+	
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2021/01/11/npm-install-fails/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2021/01/07/Detect-Visual-Studio-compilation-slow/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+    	 
+	 <div id="comment-thread"></div>
+	 <div id="loading-spin"></div>
+	 <script type="text/javascript">
+	   getComments({
+           type: "github" ? "github" : "github",       
+	       user: "ccsheller",
+	       repo: "ccsheller.github.io",
+		   client_id: "",
+           client_secret: "",
+		   no_comment: "暂时还没有留言呢，点击下面的按钮去留言吧！",
+		   go_to_comment: "去留言",
+		   no_issue: "no_issue",
+		   issue_title: "qmake 在windows上判断msvc环境有问题",
+		   issue_id: "",
+		   btn_class: "btn btn-primary",
+		   comments_target: "#comment-thread",
+		   loading_target: "#loading_spin"
+		   });
+	 </script>
+  
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2021-01-08 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/工具/">工具<span>9</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/qmake/">qmake<span>3</span></a></li>
+    </ul>
+	</div>
+	
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+    </div>
+  </div>
+  <div class="container-narrow">
+    <footer> <p>
+  &copy; 2023 ccsheller
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+<!-- syntax highlighting -->
+
+  <script>
+  marked.setOptions({
+    highlight: function (code, lang) {
+        return hljs.highlightAuto(code).value;
+    }
+  });
+  function Highlighting(){
+    var markdowns = document.getElementsByClassName('markdown');
+    for(var i=0;i<markdowns.length;i++){
+        if(markdowns[i].innerHTML) markdowns[i].innerHTML =marked(markdowns[i].innerHTML);
+    }
+  }
+  window.addEventListener('DOMContentLoaded', Highlighting, false);
+  window.addEventListener('load', Highlighting, false);
+  </script>
+
+
+</body>
+</html>
